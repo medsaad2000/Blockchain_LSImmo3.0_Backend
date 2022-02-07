@@ -1,0 +1,28 @@
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: r1
+#          uri: lb://ANNONCE-CATEGORIE
+#          predicates:
+#            - Path= /annonces/**
+#        - id: r2
+#          uri: lb://AUTH-USER
+#          predicates:
+#            - Path= /auth/**
+#        - id: r2
+#          uri: lb://CONTRAT-SERVICE
+#          predicates:
+#            - Path= /contrat/**
+
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
